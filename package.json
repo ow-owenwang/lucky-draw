@@ -10,7 +10,7 @@
     "rebuild-electron": "electron-rebuild -f -w keyboard || node-gyp rebuild --target=$(npx electron -v | sed 's/v//') --arch=arm64 --disturl=https://electronjs.org/headers",
     "postinstall": "echo 'Run: npm run rebuild-electron to compile for Electron'",
     "build:win": "electron-builder --win --x64",
-    "build:mac": "electron-builder --mac",
+    "build:mac": "electron-builder --mac --arm64",
     "build:mac-arm64": "electron-builder --mac --arm64",
     "build:mac-x64": "electron-builder --mac --x64"
   },

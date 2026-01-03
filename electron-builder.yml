@@ -11,6 +11,9 @@ files:
   - "build/Release/keyboard.node"
   - "native/**/*"
   - "binding.gyp"
+# 强制使用 GitHub 官方源下载 Electron，避免镜像源问题
+electronDownload:
+  mirror: "https://github.com/electron/electron/releases/download/v"
 win:
   target:
     - target: nsis
@@ -21,7 +24,6 @@ mac:
   target:
     - target: dmg
       arch:
-        - x64
         - arm64
   icon: build/icon.icns
   category: public.app-category.utilities
