@@ -22,6 +22,8 @@ win:
       arch:
         - x64
   icon: build/icon.ico
+  # 自定义 Windows 安装程序文件名，移除 "Setup" 后缀
+  artifactName: ${productName}-${version}-${arch}.${ext}
 mac:
   target:
     - target: dmg
