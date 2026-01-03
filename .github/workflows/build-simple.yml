@@ -6,9 +6,9 @@ on:
       - 'v*'
   workflow_dispatch:
 
-# 如果不需要自动发布 Release，可以移除下面的 env
-# env:
-#   GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+# 禁用 electron-builder 的自动发布功能
+env:
+  SKIP_NOTARIZATION: true
 
 jobs:
   build-mac-arm64:

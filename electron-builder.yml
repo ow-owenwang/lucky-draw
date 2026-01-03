@@ -14,6 +14,8 @@ files:
 # 强制使用 GitHub 官方源下载 Electron，避免镜像源问题
 electronDownload:
   mirror: "https://github.com/electron/electron/releases/download/v"
+# 禁用自动发布到 GitHub Release（使用 GitHub Actions 的 upload-artifact 代替）
+publish: null
 win:
   target:
     - target: nsis
