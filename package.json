@@ -1,0 +1,32 @@
+{
+  "name": "lucky-draw",
+  "version": "1.0.0",
+  "description": "自动刷屏工具",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron . --dev",
+    "rebuild": "node-gyp rebuild --arch=arm64",
+    "rebuild-electron": "electron-rebuild -f -w keyboard || node-gyp rebuild --target=$(npx electron -v | sed 's/v//') --arch=arm64 --disturl=https://electronjs.org/headers",
+    "postinstall": "echo 'Run: npm run rebuild-electron to compile for Electron'",
+    "build:win": "electron-builder --win --x64",
+    "build:mac": "electron-builder --mac",
+    "build:mac-arm64": "electron-builder --mac --arm64",
+    "build:mac-x64": "electron-builder --mac --x64"
+  },
+  "keywords": [
+    "electron",
+    "automation"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^28.0.0",
+    "electron-builder": "^24.9.1",
+    "electron-rebuild": "^3.2.9",
+    "nan": "^2.18.0",
+    "node-gyp": "^10.1.0"
+  },
+  "dependencies": {},
+  "packageManager": "pnpm@10.16.0+sha512.8066e7b034217b700a9a4dbb3a005061d641ba130a89915213a10b3ca4919c19c037bec8066afdc559b89635fdb806b16ea673f2468fbb28aabfa13c53e3f769"
+}

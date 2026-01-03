@@ -1,0 +1,61 @@
+name: Build Multi-Platform
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+jobs:
+  build-mac-arm64:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: npm install
+      - run: npm run rebuild-electron || npx electron-rebuild -f -w keyboard
+      - run: npm run build:mac-arm64
+      - uses: actions/upload-artifact@v4
+        with:
+          name: mac-arm64
+          path: dist/*.dmg
+
+  build-mac-x64:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: npm install
+      - run: npm run rebuild-electron || npx electron-rebuild -f -w keyboard
+      - run: npm run build:mac-x64
+      - uses: actions/upload-artifact@v4
+        with:
+          name: mac-x64
+          path: dist/*.dmg
+
+  build-windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      - name: Install Visual Studio Build Tools
+        run: |
+          choco install visualstudio2019buildtools --params "--add Microsoft.VisualStudio.Workload.VCTools" -y || echo "Chocolatey not available, using existing tools"
+        continue-on-error: true
+      - run: npm install
+      - run: npm run rebuild-electron || npx electron-rebuild -f -w keyboard
+      - run: npm run build:win
+      - uses: actions/upload-artifact@v4
+        with:
+          name: windows-x64
+          path: dist/*.exe
+

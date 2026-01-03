@@ -1,0 +1,33 @@
+appId: com.luckydraw.app
+productName: 自动刷屏工具
+directories:
+  buildResources: build
+  output: dist
+files:
+  - "**/*"
+  - "!node_modules/**/*"
+  - "node_modules/**/*"
+  - "!build"
+  - "build/Release/keyboard.node"
+  - "native/**/*"
+  - "binding.gyp"
+win:
+  target:
+    - target: nsis
+      arch:
+        - x64
+  icon: build/icon.ico
+mac:
+  target:
+    - target: dmg
+      arch:
+        - x64
+        - arm64
+  icon: build/icon.icns
+  category: public.app-category.utilities
+nsis:
+  oneClick: false
+  allowToChangeInstallationDirectory: true
+  createDesktopShortcut: true
+  createStartMenuShortcut: true
+
